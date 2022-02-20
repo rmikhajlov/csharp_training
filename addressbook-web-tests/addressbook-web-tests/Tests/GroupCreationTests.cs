@@ -17,18 +17,17 @@ namespace WebAddressbookTests
             group.Header = "ddd";
             group.Footer = "fff";
 
-            app.Navigator.GoToGroupsPage();
             app.Groups.Create(group);
             app.Auth.Logout();
         }
 
+        [Test]
         public void EmptyGroupCreationTest()
         {
             GroupData group = new GroupData("");
             group.Header = "";
             group.Footer = "";
 
-            app.Navigator.GoToGroupsPage();
             app.Groups.Create(group);
             app.Auth.Logout();
         }
