@@ -19,6 +19,11 @@ namespace WebAddressbookTests
         public GroupHelper Remove(int index)
         {
             manager.Navigator.GoToGroupsPage();
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData newGroup = new GroupData("new name");
+                Create(newGroup);
+            }
             SelectGroup(index);
             RemoveGroup();
             ReturnToGroupsPage();
@@ -28,6 +33,11 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int index, GroupData newGroup)
         {
             manager.Navigator.GoToGroupsPage();
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData group = new GroupData("new name");
+                Create(group);
+            }
             SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newGroup);
@@ -95,6 +105,5 @@ namespace WebAddressbookTests
             driver.FindElement(By.Name("update")).Click();
             return this;
         }
-
     }
 }
