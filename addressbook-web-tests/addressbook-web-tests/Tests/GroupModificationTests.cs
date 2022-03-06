@@ -13,11 +13,21 @@ namespace WebAddressbookTests
         [Test]
         public void GroupModificationTest()
         {
-            GroupData newGroup = new GroupData("111");
-            newGroup.Header = null;
-            newGroup.Footer = null;
+            int index = 1;
+            GroupData newGroup = new GroupData("new name");
+            newGroup.Header = "new header";
+            newGroup.Footer = "new footer";
 
-            app.Groups.Modify(1, newGroup);
+            if (app.Groups.IsGroupTableEmpty())
+            {
+                GroupData group = new GroupData("name");
+                group.Header = "header";
+                group.Footer = "footer";
+                app.Groups.Create(group);
+                app.Groups.Modify(1, newGroup);
+                return;
+            }
+            app.Groups.Modify(index, newGroup);
         }
     }
 }

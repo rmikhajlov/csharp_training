@@ -21,17 +21,13 @@ namespace WebAddressbookTests
             manager.Navigator.GoToNewContactPage();
             FillContactCreationForm(contact);
             SubmitContactCreationForm();
+            manager.Navigator.GoToHomePage();
             return this;
         }
 
         public ContactHelper Modify(int index, ContactData newContact)
         {
             manager.Navigator.GoToHomePage();
-            if (!IsElementPresent(By.Name("selected[]")))
-            {
-                ContactData contact = new ContactData("new name", "new lastname");
-                Create(contact);
-            }
             InitContactModification(index);
             FillContactCreationForm(newContact);
             SubmitContactModification();
@@ -42,11 +38,6 @@ namespace WebAddressbookTests
         public ContactHelper Remove(int index)
         {
             manager.Navigator.GoToHomePage();
-            if (!IsElementPresent(By.Name("selected[]")))
-            {
-                ContactData newContact = new ContactData("new name", "new lastname"); 
-                Create(newContact);
-            }
             SelectContact(index);
             InitContactRemoval();
             ConfirmContactRemoval();
@@ -103,6 +94,12 @@ namespace WebAddressbookTests
             Type(By.Name("firstname"), contact.FirstName);
             Type(By.Name("lastname"), contact.LastName);
             return this;
+        }
+
+        public bool IsContactTableEmpty()
+        {
+            manager.Navigator.GoToHomePage();
+            return !IsElementPresent(By.Name("selected[]"));
         }
     }
 }
