@@ -21,8 +21,6 @@ namespace WebAddressbookTests
                 group.Header = "header";
                 group.Footer = "footer";
                 app.Groups.Create(group);
-                app.Groups.Remove(1);
-                return;
             }
 
             app.Groups.Remove(index);

@@ -20,8 +20,6 @@ namespace WebAddressbookTests
             {
                 ContactData contact = new ContactData("Name", "Lastname");
                 app.Contacts.Create(contact);
-                app.Contacts.Modify(1, newContact);
-                return;
             }
 
             app.Contacts.Modify(index, newContact);

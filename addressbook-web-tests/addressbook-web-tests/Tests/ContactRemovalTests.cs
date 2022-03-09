@@ -18,8 +18,6 @@ namespace WebAddressbookTests
             {
                 ContactData contact = new ContactData("Name", "Lastname");
                 app.Contacts.Create(contact);
-                app.Contacts.Remove(1);
-                return;
             }
 
             app.Contacts.Remove(index);
