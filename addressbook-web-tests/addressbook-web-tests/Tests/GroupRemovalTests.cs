@@ -2,6 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
+using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace WebAddressbookTests
@@ -13,7 +14,7 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            int index = 1;
+            int index = 0;
 
             if (app.Groups.IsGroupTableEmpty())
             {
@@ -23,7 +24,13 @@ namespace WebAddressbookTests
                 app.Groups.Create(group);
             }
 
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
             app.Groups.Remove(index);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups.RemoveAt(index);
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }

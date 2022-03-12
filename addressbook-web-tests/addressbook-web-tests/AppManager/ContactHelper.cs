@@ -41,6 +41,7 @@ namespace WebAddressbookTests
             SelectContact(index);
             InitContactRemoval();
             ConfirmContactRemoval();
+            driver.FindElement(By.CssSelector("div.msgbox"));
             manager.Navigator.GoToHomePage();
             return this;
         }
@@ -59,7 +60,7 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
-            index++;
+            index = index + 2;
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td/input")).Click();
             return this;
         }
@@ -84,7 +85,7 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification(int index)
         {
-            index++;
+            index = index + 2;
             driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td[8]")).Click();
             return this;
         }
@@ -100,6 +101,20 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             return !IsElementPresent(By.Name("selected[]"));
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name='entry']"));
+            foreach(IWebElement element in elements)
+            {
+                string firstName = element.FindElement(By.XPath("./td[3]")).Text;
+                string lastName = element.FindElement(By.XPath("./td[2]")).Text;
+                contacts.Add(new ContactData(firstName, lastName));
+            }
+            return contacts;
         }
     }
 }

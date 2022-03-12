@@ -13,7 +13,7 @@ namespace WebAddressbookTests
         [Test]
         public void ContactModificationTest()
         {
-            int index = 1;
+            int index = 0;
             ContactData newContact = new ContactData("new-Name", "new-Lastname");
 
             if (app.Contacts.IsContactTableEmpty())
@@ -22,7 +22,18 @@ namespace WebAddressbookTests
                 app.Contacts.Create(contact);
             }
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Modify(index, newContact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+
+            oldContacts[index].FirstName = newContact.FirstName;
+            oldContacts[index].LastName = newContact.LastName;
+            
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }
