@@ -49,7 +49,7 @@ namespace WebAddressbookTests
         public bool IsLoggedIn(AccountData account)
         {
             return IsLoggedIn() && driver.FindElement(By.Name("logout")).FindElement(By.TagName("b")).Text
-                == "(" + account.Username + ")";
+                == string.Format("(${0})", account.Username);
         }
     }
 }
