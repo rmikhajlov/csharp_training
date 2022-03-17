@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -135,6 +136,11 @@ namespace WebAddressbookTests
             return driver.FindElements(By.XPath("//tr[@name='entry']")).Count;
         }
 
+        public int GetDisplayedContactCount()
+        {
+            return driver.FindElements(By.XPath("//tr[@name='entry' and string-length(@style)=0]")).Count;
+        }
+
         public ContactData GetContactInformationFromTable(int index)
         {
             manager.Navigator.GoToHomePage();
@@ -192,6 +198,19 @@ namespace WebAddressbookTests
             };
 
             return contact;
+        }
+
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.GoToHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return int.Parse(m.Value);
+        }
+
+        public void FillSearchString(string value)
+        {
+            Type(By.Name("searchstring"), value);
         }
     }
 }
