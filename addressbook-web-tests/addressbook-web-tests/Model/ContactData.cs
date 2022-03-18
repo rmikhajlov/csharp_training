@@ -12,6 +12,7 @@ namespace WebAddressbookTests
         private string allPhones;
         private string allEmails;
         private string allInfo;
+        private string allNames;
 
         public ContactData(string firstName, string lastName)
         {
@@ -80,6 +81,37 @@ namespace WebAddressbookTests
 
         }
 
+        public string AllNames
+        {
+            get
+            {
+                if (allNames != null)
+                {
+                    return allNames;
+                }
+                else if (String.IsNullOrEmpty(FirstName) && String.IsNullOrEmpty(LastName))
+                {
+                    return "";
+                }
+                else if (String.IsNullOrEmpty(FirstName))
+                {
+                    return LastName;
+                }
+                else if (String.IsNullOrEmpty(LastName))
+                {
+                    return FirstName;
+                }
+                else
+                {
+                    return FirstName + " " + LastName;
+                }
+            }
+            set
+            {
+                allNames = value;
+            }
+        }
+
         public string AllInfo
         {
             get
@@ -88,13 +120,9 @@ namespace WebAddressbookTests
                 {
                     return allInfo;
                 }
-                else if (String.IsNullOrEmpty(FirstName) && String.IsNullOrEmpty(LastName))
+                else
                 {
-                    return "";
-                }
-                else 
-                {
-                    return FirstName + " " + LastName + Address + DetailPhoneNumbers() + AllEmails;
+                    return AllNames + Address + DetailPhoneNumbers() + AllEmails;
                 }
             }
             set
