@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactInformationTest : AuthTestBase
+    public class ContactInformationTests : AuthTestBase
     {
         [Test]
         public void TestContactInformation()
@@ -21,6 +21,18 @@ namespace WebAddressbookTests
             Assert.AreEqual(contactFromTable.Address, contactFromEditForm.Address);
             Assert.AreEqual(contactFromTable.AllPhones, contactFromEditForm.AllPhones);
             Assert.AreEqual(contactFromTable.AllEmails, contactFromEditForm.AllEmails);
+        }
+
+
+        [Test]
+        public void TestContactDetailsInformation()
+        {
+            int index = 0;
+
+            ContactData contactFromDetails = app.Contacts.GetContactInformationFromDetails(index);
+            ContactData contactFromEditForm = app.Contacts.GetContactInformationFromEditForm(index);
+
+            Assert.AreEqual(contactFromDetails.AllInfo, contactFromEditForm.AllInfo);
         }
     }
 }

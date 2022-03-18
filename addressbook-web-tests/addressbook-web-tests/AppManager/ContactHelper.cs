@@ -212,5 +212,25 @@ namespace WebAddressbookTests
         {
             Type(By.Name("searchstring"), value);
         }
+
+        public ContactData GetContactInformationFromDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            GoToContactDetailsPage(index);
+            string allInfo = Regex.Replace(driver.FindElement(By.Id("content")).Text, "[\r\n]", "");
+
+            ContactData contact = new ContactData()
+            {
+                AllInfo = allInfo
+            };
+
+            return contact;
+        }
+
+        public void GoToContactDetailsPage(int index)
+        {
+            index++;
+            driver.FindElement(By.XPath("//tr[@name='entry'][" + index + "]/td[7]")).Click();
+        }
     }
 }

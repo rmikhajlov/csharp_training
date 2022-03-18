@@ -11,11 +11,18 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private string allInfo;
 
         public ContactData(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
+        }
+
+        public ContactData()
+        {
+            FirstName = "";
+            LastName = "";
         }
 
         public string FirstName { get; set; }
@@ -39,22 +46,13 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone)).Trim();
+                    return (CleanUpPhoneNumber(HomePhone) + CleanUpPhoneNumber(MobilePhone) + CleanUpPhoneNumber(WorkPhone)).Trim();
                 }
             }
             set
             {
                 allPhones = value;
             }
-        }
-
-        private string CleanUp(string phone)
-        {
-            if (phone == null || phone == "")
-            {
-                return "";
-            }
-            return Regex.Replace(phone, "[ -()]", "") + "\r\n";
         }
 
         public string FirstEmail{ get; set; }
@@ -80,6 +78,29 @@ namespace WebAddressbookTests
                 allEmails = value;
             }
 
+        }
+
+        public string AllInfo
+        {
+            get
+            {
+                if (allInfo != null)
+                {
+                    return allInfo;
+                }
+                else if (String.IsNullOrEmpty(FirstName) && String.IsNullOrEmpty(LastName))
+                {
+                    return "";
+                }
+                else 
+                {
+                    return FirstName + " " + LastName + Address + DetailPhoneNumbers() + AllEmails;
+                }
+            }
+            set
+            {
+                allInfo = value;
+            }
         }
 
         public string Id { get; set; }
@@ -124,6 +145,38 @@ namespace WebAddressbookTests
         public override string ToString()
         {
             return "Firstname = " + FirstName + ", Lastname = " + LastName;
+        }
+
+        private string CleanUpPhoneNumber(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ ()]|-", "") + "\r\n";
+        }
+
+        
+        private string DetailPhoneNumbers()
+        {
+            string finalNumberString = "";
+
+            if (HomePhone != null && HomePhone != "")
+            {
+                finalNumberString += "H: " + HomePhone;
+            }
+
+            if (MobilePhone != null && MobilePhone != "")
+            {
+                finalNumberString += "M: " + MobilePhone;
+            }
+
+            if (WorkPhone != null && WorkPhone != "")
+            {
+                finalNumberString += "W: " + WorkPhone;
+            }
+
+            return finalNumberString;
         }
     }
 }
