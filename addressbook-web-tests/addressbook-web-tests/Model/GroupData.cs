@@ -68,7 +68,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return "Name = " + Name;
+            return "Name = " + Name + "\nheader = " + Header + "\nfooter = " + Footer;
         }
 
 
