@@ -122,7 +122,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return AllNames + Address + DetailPhoneNumbers() + AllEmails;
+                    return (DetailPerson() + DetailPhoneNumbers() + DetailEmails()).Trim();
                 }
             }
             set
@@ -187,24 +187,64 @@ namespace WebAddressbookTests
         
         private string DetailPhoneNumbers()
         {
-            string finalNumberString = "";
+            string finalNumberString = "\r\n";
 
             if (HomePhone != null && HomePhone != "")
             {
-                finalNumberString += "H: " + HomePhone;
+                finalNumberString += "H: " + HomePhone + "\r\n";
             }
 
             if (MobilePhone != null && MobilePhone != "")
             {
-                finalNumberString += "M: " + MobilePhone;
+                finalNumberString += "M: " + MobilePhone + "\r\n";
             }
 
             if (WorkPhone != null && WorkPhone != "")
             {
-                finalNumberString += "W: " + WorkPhone;
+                finalNumberString += "W: " + WorkPhone + "\r\n";
             }
 
             return finalNumberString;
+        }
+
+        
+        private string DetailEmails()
+        {
+            string finalEmailString = "\r\n";
+
+            if (FirstEmail != null && FirstEmail != "")
+            {
+                finalEmailString += FirstEmail + "\r\n";
+            }
+
+            if (SecondEmail != null && SecondEmail != "")
+            {
+                finalEmailString += SecondEmail + "\r\n";
+            }
+
+            if (ThirdEmail != null && ThirdEmail != "")
+            {
+                finalEmailString += ThirdEmail + "\r\n";
+            }
+
+            return finalEmailString;
+        }
+
+        private string DetailPerson()
+        {
+            string finalPersonString = "";
+
+            if (AllNames != null && AllNames != "")
+            {
+                finalPersonString += AllNames + "\r\n";
+            }
+
+            if (Address != null && Address != "")
+            {
+                finalPersonString += Address + "\r\n";
+            }
+
+            return finalPersonString;
         }
     }
 }

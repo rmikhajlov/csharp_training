@@ -217,7 +217,8 @@ namespace WebAddressbookTests
         {
             manager.Navigator.GoToHomePage();
             GoToContactDetailsPage(index);
-            string allInfo = Regex.Replace(driver.FindElement(By.Id("content")).Text, "[\r\n]", "");
+            // string allInfo = Regex.Replace(driver.FindElement(By.Id("content")).Text, "[\r\n]", "");
+            string allInfo = driver.FindElement(By.Id("content")).Text;
 
             ContactData contact = new ContactData()
             {
