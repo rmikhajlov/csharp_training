@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Xml;
+using System.Linq;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using NUnit.Framework;
@@ -95,6 +96,21 @@ namespace WebAddressbookTests
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+        }
+
+
+        [Test]
+        public void DbConnectivityTest()
+        {
+            DateTime start = DateTime.Now;
+            List<GroupData> fromUi = app.Groups.GetGroupList();
+            DateTime end = DateTime.Now;
+            Console.WriteLine("Ui time: " + (end.Subtract(start)));
+
+            start = DateTime.Now;
+            List<GroupData> fromDb = GroupData.GetAll();
+            end = DateTime.Now;
+            Console.WriteLine("Db time: " + (end.Subtract(start)));
         }
     }
 }
