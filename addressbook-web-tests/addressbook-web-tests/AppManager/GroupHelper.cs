@@ -25,6 +25,11 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool IsAnyContactsInGroup(GroupData group)
+        {
+            return group.GetContacts().Any();
+        }
+
         public GroupHelper Remove(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();

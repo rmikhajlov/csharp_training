@@ -102,15 +102,11 @@ namespace WebAddressbookTests
         [Test]
         public void DbConnectivityTest()
         {
-            DateTime start = DateTime.Now;
-            List<GroupData> fromUi = app.Groups.GetGroupList();
-            DateTime end = DateTime.Now;
-            Console.WriteLine("Ui time: " + (end.Subtract(start)));
+            foreach (ContactData contact in GroupData.GetAll()[0].GetContacts())
+            {
+                Console.WriteLine(contact);
+            }
 
-            start = DateTime.Now;
-            List<GroupData> fromDb = GroupData.GetAll();
-            end = DateTime.Now;
-            Console.WriteLine("Db time: " + (end.Subtract(start)));
         }
     }
 }
