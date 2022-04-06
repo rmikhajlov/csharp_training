@@ -63,7 +63,7 @@ namespace WebAddressbookTests
             SelectContact(contact.Id);
             InitContactRemoval();
             ConfirmContactRemoval();
-            driver.FindElement(By.CssSelector("div.msgbox"));
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
             manager.Navigator.GoToHomePage();
             return this;
         }
