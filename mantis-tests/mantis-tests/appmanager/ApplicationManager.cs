@@ -26,6 +26,9 @@ namespace mantis_tests
             Ftp = new FtpHelper(this);
             James = new JamesHelper(this);
             Mail = new MailHelper(this);
+            Auth = new LoginHelper(this);
+            Projects = new ProjectHelper(this);
+            Navigator = new NavigationHelper(this, baseURL);
         }
 
         ~ApplicationManager()
@@ -64,5 +67,8 @@ namespace mantis_tests
 
         public JamesHelper James { get; }
         public MailHelper Mail { get; }
+        public LoginHelper Auth { get; }
+        public ProjectHelper Projects { get; }
+        public NavigationHelper Navigator { get; }
     }
 }
