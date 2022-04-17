@@ -35,6 +35,30 @@ namespace mantis_tests
             SubmitProjectCreation();
         }
 
+        public void Remove(ProjectData project)
+        {
+            manager.Navigator.GoToProjectsManagementPage();
+            OpenProjectPage(project);
+            InitiateProjectRemoval();
+            ConfirmProjectRemoval();
+        }
+
+        public void ConfirmProjectRemoval()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete Project']")).Click();
+            driver.FindElement(By.XPath("//li[@class='active']/a[contains(text(), 'Manage Projects')]")).Click();
+        }
+
+        public void InitiateProjectRemoval()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete Project']")).Click();
+        }
+
+        public void OpenProjectPage(ProjectData project)
+        {
+            driver.FindElement(By.LinkText(project.Name)).Click();
+        }
+
         public void SubmitProjectCreation()
         {
             driver.FindElement(By.XPath("//input[@value='Add Project']")).Click();
