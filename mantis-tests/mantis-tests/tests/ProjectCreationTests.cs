@@ -13,12 +13,18 @@ namespace mantis_tests
         [Test]
         public void TestProjectCreation()
         {
-            ProjectData project = new ProjectData("project_11");
+            ProjectData project = new ProjectData("project_12");
+            AccountData account = new AccountData()
+            {
+                Name = "administrator",
+                Password = "root"
+            };
 
-            List<ProjectData> oldProjects = app.Projects.GetAll();
+            List<ProjectData> oldProjects = app.Api.GetProjectList(account);
             app.Projects.Create(project);
 
-            List<ProjectData> newProjects = app.Projects.GetAll();
+            List<ProjectData> newProjects = app.Api.GetProjectList(account);
+
             oldProjects.Add(project);
             oldProjects.Sort();
             newProjects.Sort();

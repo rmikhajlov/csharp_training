@@ -30,6 +30,7 @@ namespace mantis_tests
             Projects = new ProjectHelper(this);
             Navigator = new NavigationHelper(this, baseURL);
             Admin = new AdminHelper(this, baseURL);
+            Api = new ApiHelper(this);
         }
 
         ~ApplicationManager()
@@ -72,5 +73,6 @@ namespace mantis_tests
         public ProjectHelper Projects { get; }
         public NavigationHelper Navigator { get; }
         public AdminHelper Admin { get; }
+        public ApiHelper Api { get; }
     }
 }
