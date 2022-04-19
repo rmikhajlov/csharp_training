@@ -13,7 +13,7 @@ namespace mantis_tests
         [Test]
         public void TestProjectCreation()
         {
-            ProjectData project = new ProjectData("project_4");
+            ProjectData project = new ProjectData("project_11");
 
             List<ProjectData> oldProjects = app.Projects.GetAll();
             app.Projects.Create(project);
@@ -22,18 +22,6 @@ namespace mantis_tests
             oldProjects.Add(project);
             oldProjects.Sort();
             newProjects.Sort();
-
-            Console.WriteLine("Old: ");
-            foreach (ProjectData p in oldProjects)
-            {
-                Console.WriteLine(p);
-            }
-
-            Console.WriteLine("New: ");
-            foreach (ProjectData p in newProjects)
-            {
-                Console.WriteLine(p);
-            }
 
             Assert.AreEqual(oldProjects, newProjects);
         }

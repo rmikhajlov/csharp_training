@@ -16,11 +16,11 @@ namespace mantis_tests
 
         public void GoToProjectsManagementPage()
         {
-            if (driver.Url == baseURL + "/mantisbt/manage_proj_page.php")
+            if (driver.Url == baseURL + "/manage_proj_page.php")
             {
                 return;
             }
-            driver.Navigate().GoToUrl(baseURL + "/mantisbt/manage_proj_page.php");
+            driver.Navigate().GoToUrl(baseURL + "/manage_proj_page.php");
         }
     }
 }
